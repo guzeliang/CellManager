@@ -1,0 +1,13 @@
+node_modules/
+.DS_Store
+.vscode
+.idea
+*.DS_Store
+logs/*
+files/*
+server/config/simtoken
+start.bat
+npm-debug.log
+npm-debug.log.*
+public/*
+typings/*
