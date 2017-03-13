@@ -22,6 +22,10 @@ var DeviceUnionConsumable = db.define('deviceUnionConsumable', {
         type: Sequelize.INTEGER,
         defaultValue: 1
     },
+    times: { //扫码次数
+        type: Sequelize.INTEGER,
+        defaultValue: 1
+    },
     createdAt: {
         type: Sequelize.BIGINT(13)
     }

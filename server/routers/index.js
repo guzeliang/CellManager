@@ -2,9 +2,9 @@ var path = require('path');
 
 module.exports = function(app) {
     var routers = [
-        '/devices',
-        '/customers',
-        '/consumables',
+        '/devices*',
+        '/customers*',
+        '/consumables*',
     ];
 
     app.get(routers, function(req, res) {

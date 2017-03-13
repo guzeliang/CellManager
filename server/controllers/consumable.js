@@ -17,12 +17,12 @@ exports.getPage = function(req, res, next) {
     var allCount = 0;
 
     var countSql = `SELECT COUNT(*) as recordCount FROM consumable  c 
-    LEFT JOIN deviceunionconsumable duc ON c.id = duc.deviceId  
+    LEFT JOIN deviceunionconsumable duc ON c.id = duc.consumableId  
     WHERE  (${customerId}=-1 OR (${customerId} <> -1 AND c.customerId = ${customerId})) 
     AND (${deviceId}=-1 OR (${deviceId} <> -1 AND duc.deviceId = ${deviceId})) `;
 
     var querySql = `SELECT c.* FROM consumable  c 
-    LEFT JOIN deviceunionconsumable duc ON c.id = duc.deviceId  
+    LEFT JOIN deviceunionconsumable duc ON c.id = duc.consumableId  
     WHERE  (${customerId}=-1 OR (${customerId} <> -1 AND c.customerId = ${customerId})) 
     AND (${deviceId}=-1 OR (${deviceId} <> -1 AND duc.deviceId = ${deviceId})) ORDER BY c.id limit ${firNum},${pageSize}`;
 
@@ -55,9 +55,13 @@ exports.remove = function(req, res) {
     if (!id) {
         return res.json(jsonHelper.getError('id is null'))
     }
-    models.Consumable.destroy({ where: { id: id } }).then(function(count) {
-        res.json(jsonHelper.getSuccess('删除成功'));
-    }).catch(function(err) {
-        res.json(jsonHelper.getError(err.message));
-    })
+    models.DeviceUnionConsumable.destroy({ where: { consumableId: id } })
+        .then(p => {
+            return models.Consumable.destroy({ where: { id: id } });
+        })
+        .then(function(count) {
+            res.json(jsonHelper.getSuccess('删除成功'));
+        }).catch(function(err) {
+            res.json(jsonHelper.getError(err.message));
+        })
 }

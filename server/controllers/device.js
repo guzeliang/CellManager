@@ -59,9 +59,61 @@ exports.remove = function(req, res) {
     if (!id) {
         return res.json(jsonHelper.getError('id is null'))
     }
-    models.RemoteDevice.destroy({ where: { id: id } }).then(function(count) {
-        res.json(jsonHelper.getSuccess('删除成功'));
-    }).catch(function(err) {
-        res.json(jsonHelper.getError(err.message));
-    })
+    models.DeviceUnionConsumable.destroy({ where: { deviceId: id } })
+        .then(p => {
+            return models.RemoteDevice.destroy({ where: { id: id } });
+        })
+        .then(function(count) {
+            res.json(jsonHelper.getSuccess('删除成功'));
+        }).catch(function(err) {
+            res.json(jsonHelper.getError(err.message));
+        })
 }
+
+exports.qr = function(req, res, next) {
+    var id = req.query.id;
+    var deviceId = req.query.deviceid;
+
+    if (!id) {
+        return res.json('耗材编号不能为空');
+    }
+
+    if (!deviceId) {
+        return res.json('设备编号不能为空');
+    }
+    var remoteDevie;
+    var consumable;
+
+    models.RemoteDevice.findOne({ where: { clientId: deviceId }, raw: true })
+        .then(doc => {
+            if (!doc) return Promise.reject(new Error('对应的设备不存在'));
+            remoteDevie = doc;
+            return Promise.resolve(doc);
+        })
+        .then(p => {
+            return models.Consumable.findOne({ where: { serialNumber: id }, raw: true });
+        })
+        .then(docx => {
+            console.log('x', docx)
+            if (!docx) return Promise.reject(new Error('对应的耗材不存在'));
+            consumable = docx;
+            return Promise.resolve(docx);
+        }).then(() => {
+            return models.DeviceUnionConsumable.findOne({ where: { consumableId: consumable.id, deviceId: remoteDevie.id }, raw: true });
+        })
+        .then((doc) => {
+            console.log('y', doc);
+            if (!doc)
+                return models.DeviceUnionConsumable.create({ consumableId: consumable.id, deviceId: remoteDevie.id })
+            else {
+                doc.times += 1;
+                return models.DeviceUnionConsumable.update(doc, { where: { id: doc.id }, fields: ['times'] });
+            }
+        })
+        .then(doc => {
+            res.json(jsonHelper.getSuccess(consumable));
+        })
+        .catch(err => {
+            res.json(jsonHelper.getError(err.message));
+        })
+};
