@@ -4,7 +4,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var commonConfig = require('./webpack.common.js');
 var helpers = require('./helpers');
 
-var port = process.env.MANAGER_PORT || 6001;
+var port = process.env.MANAGER_PORT || 6006;
 
 module.exports = webpackMerge(commonConfig, {
     devtool: 'cheap-module-eval-source-map',

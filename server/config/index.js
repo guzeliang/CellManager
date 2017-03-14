@@ -1,7 +1,7 @@
 var path = require('path');
 module.exports = {
     ROOT: __dirname,
-    PORT: 6001,
+    PORT: 6006,
     FILE_DIR: path.resolve(__dirname, '../files'),
     LOG_DIR: path.resolve(__dirname, '../logs'),
     DB: {

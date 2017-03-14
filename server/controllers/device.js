@@ -94,15 +94,18 @@ exports.qr = function(req, res, next) {
             return models.Consumable.findOne({ where: { serialNumber: id }, raw: true });
         })
         .then(docx => {
-            console.log('x', docx)
             if (!docx) return Promise.reject(new Error('对应的耗材不存在'));
             consumable = docx;
             return Promise.resolve(docx);
-        }).then(() => {
+        }).then(() => { //判断该耗材使用次数是否大于5
+            return models.DeviceUnionConsumable.sum('times', { where: { consumableId: consumable.id } })
+        }).then((times) => {
+            if (times >= 5) {
+                return Promise.reject(new Error('耗材最多只能使用5次'));
+            }
             return models.DeviceUnionConsumable.findOne({ where: { consumableId: consumable.id, deviceId: remoteDevie.id }, raw: true });
         })
         .then((doc) => {
-            console.log('y', doc);
             if (!doc)
                 return models.DeviceUnionConsumable.create({ consumableId: consumable.id, deviceId: remoteDevie.id })
             else {
