@@ -75,11 +75,11 @@ exports.qr = function(req, res, next) {
     var deviceId = req.query.deviceid;
 
     if (!id) {
-        return res.json('耗材编号不能为空');
+        return res.json(jsonHelper.getError('耗材编号不能为空'));
     }
 
     if (!deviceId) {
-        return res.json('设备编号不能为空');
+        return res.json(jsonHelper.getError('设备编号不能为空'));
     }
     var remoteDevie;
     var consumable;
