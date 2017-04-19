@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'devices', loadChildren: './device/device.module#DeviceModule' },
   { path: 'customers', loadChildren: './customer/customer.module#CustomerModule' },
   { path: 'consumables', loadChildren: './consumable/consumable.module#ConsumableModule' },
+  { path: 'login', loadChildren: './login/login.module#LoginModule' },
 ];
 
 @NgModule({

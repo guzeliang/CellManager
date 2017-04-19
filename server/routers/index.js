@@ -2,6 +2,7 @@ var path = require('path');
 
 module.exports = function(app) {
     var routers = [
+        '/login*',
         '/devices*',
         '/customers*',
         '/consumables*',
