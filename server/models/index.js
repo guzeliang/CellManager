@@ -1,6 +1,7 @@
 var RemoteDevice = require('./remoteDevice');
 var Consumable = require('./consumable');
 var Customer = require('./customer');
+var Member = require('./member');
 
 var DeviceUnionConsumable = require('./deviceUnionConsumable');
 
@@ -15,6 +16,7 @@ db.sync().then(function() {
 exports.RemoteDevice = RemoteDevice;
 exports.Consumable = Consumable;
 exports.Customer = Customer;
+exports.Member = Member;
 
 exports.DeviceUnionConsumable = DeviceUnionConsumable;
 exports.db = db;

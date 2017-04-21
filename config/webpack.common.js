@@ -37,6 +37,8 @@ module.exports = {
             'moment',
             'bootstrap',
             'jquery',
+            'angular2-cookie',
+            'blueimp-md5',
         ],
         app: './src/js/main.ts'
     },

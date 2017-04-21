@@ -18,26 +18,12 @@ export class LoginService {
 
         return ret.join('&');
     }
-    
-    delete(id:number): Promise<Response> {
-        return this.http.delete(this.apiUrl + '/' + id).toPromise();
+    singup(model:any): Promise<Response> {
+        return this.http.post('/api/singup', model).toPromise();
     }
 
-    update(model:any): Promise<Response> {
-        return this.http.put(this.apiUrl, model).toPromise();
-    }
-
-    create(model:any): Promise<Response> {
-        return this.http.post(this.apiUrl, model).toPromise();
-    }
-
-    get(condition:Object): Promise<Response> {
+    login(condition:Object): Promise<Response> {
         var opt = new RequestOptions({search:this.generateSearchParams(condition)});
-        return this.http.get(this.apiUrl + '/list', opt).toPromise();
-    }
-
-    page(condition:any): Promise<Response> {
-        var opt = new RequestOptions({search:this.generateSearchParams(condition)});
-        return this.http.get(this.apiUrl + '/page', opt).toPromise();
+        return this.http.get('/api/login', opt).toPromise();
     }
 }

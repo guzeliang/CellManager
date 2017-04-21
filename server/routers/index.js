@@ -12,6 +12,7 @@ module.exports = function(app) {
         res.sendFile(path.join(__dirname, '../../public', 'index.html'));
     })
 
+    app.use(require('./account'));
     app.use(require('./device'));
     app.use(require('./customer'));
     app.use(require('./consumable'));

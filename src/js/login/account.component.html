@@ -26,8 +26,8 @@
                         <div class="input-wrapper">
                             <label for="email">联系方式：</label>
                             <input class="form-control" name='contact' type="text" required maxlength="50" minlength="5" [(ngModel)]="contact" />
-                            <span *ngIf="xform.controls.name?.errors?.required" class="help-block has-error">* 必填项</span>
-                            <span class="help-block has-error" *ngIf="xform.controls.name?.errors?.minlength">* 长度必须大于5个字符</span>
+                            <span *ngIf="xform.controls.contact?.errors?.required" class="help-block has-error">* 必填项</span>
+                            <span class="help-block has-error" *ngIf="xform.controls.contact?.errors?.minlength">* 长度必须大于5个字符</span>
                         </div>
                     </div>
 
@@ -35,8 +35,14 @@
                         <div class="input-wrapper">
                             <label for="email">地址：</label>
                             <input class="form-control" name='address' type="text" required maxlength="50" minlength="4" [(ngModel)]="address" />
-                            <span *ngIf="xform.controls.name?.errors?.required" class="help-block has-error">* 必填项</span>
-                            <span class="help-block has-error" *ngIf="xform.controls.name?.errors?.minlength">* 长度必须大于4个字符</span>
+                            <span *ngIf="xform.controls.address?.errors?.required" class="help-block has-error">* 必填项</span>
+                            <span class="help-block has-error" *ngIf="xform.controls.address?.errors?.minlength">* 长度必须大于4个字符</span>
+                        </div>
+                    </div>
+                    <div class="form-group has-error">
+                        <div class="input-wrapper">
+
+                            <span *ngIf="errMsg" class="help-block has-error">{{errMsg}}</span>
                         </div>
                     </div>
                     <div style="text-align:center;">

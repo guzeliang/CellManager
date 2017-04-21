@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule  } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing'; 
+import { AuthGuard } from './common/auth.guard';
+import {CookieService} from 'angular2-cookie/core';
 
 import { NotFoundComponent } from './common/notfound.component';
 
@@ -24,7 +25,7 @@ import {FooterComponent} from './common/app.footer.component';
     FooterComponent,
     NotFoundComponent,
   ],
-  providers: [],
+  providers: [AuthGuard, CookieService],
   bootstrap: [AppComponent, HeaderComponent],
 })
 export class AppModule { }

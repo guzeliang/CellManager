@@ -8,5 +8,7 @@
         "tween.js": "registry:dt/tween.js#0.0.0+20161108151541",
         "underscore": "registry:dt/underscore#1.8.3+20161123125004"
     },
-    "dependencies": {}
+    "dependencies": {
+        "blueimp-md5": "registry:dt/blueimp-md5#2.7.0+20170323131124"
+    }
 }
