@@ -35,6 +35,14 @@ exports.singup = function(req, res) {
         return res.json(jsonHelper.getError('body is empty'));
     }
 
+    if (!member.name) {
+        return res.json(jsonHelper.getError('name is empty'));
+    }
+
+    if (!member.password) {
+        return res.json(jsonHelper.getError('password is empty'));
+    }
+
     models.Member.findOne({ where: { name: member.name } }).then(doc => {
         console.log(doc);
         if (doc) throw new Error('name is exist');
