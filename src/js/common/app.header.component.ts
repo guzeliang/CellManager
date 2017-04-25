@@ -25,6 +25,9 @@ var $ = require('jquery');
                    <li>
                         <a routerLink="/consumables" (click)='addClassx($event)'  routerLinkActive="active">耗材</a>
                    </li>
+                   <li>
+                        <a routerLink="/appx" (click)='addClassx($event)'  routerLinkActive="active">客户端升级</a>
+                   </li>
                </ul>
                 <ul class="nav navbar-nav navbar-right" *ngIf='name'>
 				 <li class="dropdown">

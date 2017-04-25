@@ -39,6 +39,7 @@ module.exports = {
             'jquery',
             'angular2-cookie',
             'blueimp-md5',
+            'ng2-file-upload',
         ],
         app: './src/js/main.ts'
     },

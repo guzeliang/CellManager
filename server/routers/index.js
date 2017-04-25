@@ -16,5 +16,6 @@ module.exports = function(app) {
     app.use(require('./device'));
     app.use(require('./customer'));
     app.use(require('./consumable'));
+    app.use(require('./appx'));
 
 };

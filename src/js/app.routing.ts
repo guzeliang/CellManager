@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'customers', loadChildren: './customer/customer.module#CustomerModule' , canActivate:[AuthGuard] },
   { path: 'consumables', loadChildren: './consumable/consumable.module#ConsumableModule', canActivate:[AuthGuard] },
   { path: 'login', loadChildren: './login/login.module#LoginModule' },
+  { path: 'appx', loadChildren: './appx/appx.module#AppxModule' },
 ];
 
 @NgModule({
