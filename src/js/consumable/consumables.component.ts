@@ -38,6 +38,7 @@ export class ConsumablesComponent implements OnInit {
     }
     
     remove(device:Consumable, evt:any) {
+        if(!confirm('确定要删除吗')) return;
         this.service.delete(device.id).then(res => {
             var ret = res.json();
             if(ret.code === 'success') {
@@ -83,7 +84,8 @@ export class ConsumablesComponent implements OnInit {
         this.service.create(this.SelectedModel).then(res => {
             var ret = res.json();
             if(ret.code==='success') {
-                _this.consumables.unshift(ret.result as Consumable);
+                _this.pageChange(1);
+                //_this.consumables.unshift(ret.result as Consumable);
                 btn.click();
             } else {
                 _this.popBy('#btnCreate', ret.message,'');

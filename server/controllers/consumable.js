@@ -10,7 +10,7 @@ exports.getPage = function(req, res, next) {
     var pageSize = +req.query.pagesize || 10;
     var pageIndex = +req.query.pageindex || 1;
     var firNum = (pageIndex - 1) * pageSize;
-    var keyword = req.query.keyword;
+    var keyword = req.query.keyword || '';
     var customerId = +req.query.customerid || -1;
     var deviceId = +req.query.deviceid || -1;
 
@@ -19,11 +19,13 @@ exports.getPage = function(req, res, next) {
     var countSql = `SELECT DISTINCT COUNT(*) as recordCount FROM consumable  c 
     LEFT JOIN deviceunionconsumable duc ON c.id = duc.consumableId  
     WHERE  (${customerId}=-1 OR (${customerId} <> -1 AND c.customerId = ${customerId})) 
+    AND ('${keyword}'='' OR ('${keyword}' <> '' AND c.type LIKE '%${keyword}%')) 
     AND (${deviceId}=-1 OR (${deviceId} <> -1 AND duc.deviceId = ${deviceId})) `;
 
     var querySql = `SELECT DISTINCT c.* FROM consumable  c 
     LEFT JOIN deviceunionconsumable duc ON c.id = duc.consumableId  
     WHERE  (${customerId}=-1 OR (${customerId} <> -1 AND c.customerId = ${customerId})) 
+    AND ('${keyword}'='' OR ('${keyword}' <> '' AND c.type LIKE '%${keyword}%')) 
     AND (${deviceId}=-1 OR (${deviceId} <> -1 AND duc.deviceId = ${deviceId})) ORDER BY c.id limit ${firNum},${pageSize}`;
 
     models.db.query(countSql, { raw: true, type: 'SELECT' }).then(count => {

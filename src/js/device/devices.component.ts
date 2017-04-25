@@ -39,6 +39,7 @@ export class DevicesComponent implements OnInit {
     }
     
     remove(device:Device, evt:any) {
+        if(!confirm('确定要删除吗')) return;
         this.service.delete(device.id).then(res => {
             var ret = res.json();
             if(ret.code === 'success') {
@@ -83,7 +84,8 @@ export class DevicesComponent implements OnInit {
         this.service.create(this.SelectedDevice).then(res => {
             var ret = res.json();
             if(ret.code==='success') {
-                _this.devices.unshift(ret.result as Device);
+                _this.pageChange(1);
+                //_this.devices.unshift(ret.result as Device);
                 btn.click();
             } else {
                 _this.popBy('#btnCreate', ret.message,'');
