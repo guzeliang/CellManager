@@ -5,6 +5,7 @@ node_modules/
 *.DS_Store
 logs/*
 files/*
+uploads/*
 server/logs/*
 server/files/*
 server/config/simtoken

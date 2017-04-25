@@ -1,4 +1,5 @@
 var BufferHelper = require('bufferhelper');
+var path = require('path');
 var fs = require('fs');
 var request = require('request');
 var Promise = require('bluebird');
@@ -9,19 +10,32 @@ var unzip = require('unzip');
 var config = require('../config');
 var moment = require('moment');
 var _ = require('underscore');
+var formidable = require('formidable');
 
 exports.upload = function(req, res, next) {
-    uploadx(req, res, function(err) {
-        console.log(req.file)
+    var form = new formidable.IncomingForm(); //创建上传表单
+    form.encoding = 'utf-8'; //设置编辑
+    form.uploadDir = config.APPX_DIR; //设置上传目录
+    form.keepExtensions = true; //保留后缀
+    form.maxFieldsSize = 2 * 1024 * 1024; //文件大小
+    form.parse(req, function(err, fields, files) {
+
         if (err) {
             return res.json(jsonHelper.getError(err.message));
         }
+        var ext = path.extname(files.uploadedfile.name)
+        if (ext != '.zip') {
+            fs.unlinkSync(files.uploadedfile.path);
+            return res.json(jsonHelper.getError('上传只支持zip文件'));
+        }
+
+        fs.renameSync(files.uploadedfile.path, config.APPX_DIR + '/' + files.uploadedfile.name); //重命名
 
         var extract = unzip.Extract({ path: config.APPX_DIR });
 
         //解压异常处理  
         extract.on('error', function(err) {
-            fs.unlinkSync(req.file.path);
+            fs.unlinkSync(config.APPX_DIR + '/' + files.uploadedfile.name);
             return res.json(jsonHelper.getError(err.message));
         });
 
@@ -30,8 +44,30 @@ exports.upload = function(req, res, next) {
             res.json(jsonHelper.getSuccess("上传成功"));
         });
 
-        fs.createReadStream(req.file.path).pipe(extract);
+        fs.createReadStream(config.APPX_DIR + '/' + files.uploadedfile.name).pipe(extract);
     });
+
+    // uploadx(req, res, function(err) {
+    //     console.log(req.file)
+    //     if (err) {
+    //         return res.json(jsonHelper.getError(err.message));
+    //     }
+
+    //     var extract = unzip.Extract({ path: config.APPX_DIR });
+
+    //     //解压异常处理  
+    //     extract.on('error', function(err) {
+    //         fs.unlinkSync(req.file.path);
+    //         return res.json(jsonHelper.getError(err.message));
+    //     });
+
+    //     //解压完成处理  
+    //     extract.on('finish', function() {
+    //         res.json(jsonHelper.getSuccess("上传成功"));
+    //     });
+
+    //     fs.createReadStream(req.file.path).pipe(extract);
+    // });
 };
 
 exports.list = function(req, res, next) {
