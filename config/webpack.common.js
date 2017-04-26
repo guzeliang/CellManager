@@ -15,9 +15,6 @@ var helpers = require('./helpers');
 
 module.exports = {
     entry: {
-        'lodash': 'lodash',
-        'ng2-pagination': 'ng2-pagination',
-        'qrcode-generator': 'qrcode-generator',
         polyfills: [
             'zone.js',
             'rxjs',
@@ -25,7 +22,7 @@ module.exports = {
             'es6-shim',
             'es6-promise',
         ],
-        vendor: [
+        angular: [
             "@angular/common",
             "@angular/compiler",
             "@angular/core",
@@ -34,14 +31,16 @@ module.exports = {
             "@angular/platform-browser",
             "@angular/platform-browser-dynamic",
             "@angular/router",
-            "@angular/upgrade",
-
+            "@angular/upgrade"
+        ],
+        vendor: [
             'moment',
             'bootstrap',
             'jquery',
             'angular2-cookie',
             'blueimp-md5',
-            'ng2-file-upload'
+            'ng2-file-upload',
+            'ng2-pagination'
         ],
         app: './src/js/main.ts'
     },
