@@ -32,6 +32,7 @@ module.exports = webpackMerge(commonConfig, {
             context: ['/bar', '/baz', '/foo', '/api', ],
             target: 'http://localhost:' + port,
             secure: false
-        }]
+        }],
+        outputPath: helpers.root('public')
     }
 });

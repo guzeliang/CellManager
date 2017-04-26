@@ -5,9 +5,10 @@ import { ActivatedRoute, Params }   from '@angular/router';
 
 import {Consumable} from './consumable';
 import {ConsumableService} from './consumable.service';
-
 var $ = require('jquery');
 require('bootstrap');
+import * as QRCode from 'qrcode';
+import * as _ from 'underscore';
 
 @Component({
     selector: 'consumables',
@@ -70,6 +71,29 @@ export class ConsumablesComponent implements OnInit {
         $(obj).data('timeout1986',timeout);
     }
     
+    qr(device:Consumable, evt:any) {
+        $(evt.target).popover({
+            placement: 'bottom',
+            trigger: 'manual',
+            html:true,
+            content: `<div onclick="$(this).parent().parent().remove()" style="width:200px;height:200px;" id="x_device_${device.id}"></div>`,
+            container: 'body'
+        });
+        $(evt.target).popover('show');
+        var opts = {
+          errorCorrectionLevel: 'H',
+          type: 'image/jpeg',
+          rendererOpts: {
+            quality: 0.7
+          }
+        }
+        var msg = `http://${location.host}/api/iot/qrcode?id=${device.serialNumber}`;
+
+        QRCode.toDataURL(msg, opts, function (err, url) {
+            if (err) return;
+            $(`#x_device_${device.id}`).append(`<img style="width:200px;height:200px;" src='${url}' />`)
+        })
+    }
     
     openDialog() {
         this.SelectedModel = new Consumable;

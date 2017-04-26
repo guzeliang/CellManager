@@ -8,7 +8,7 @@ import {CustomerService} from './customer.service';
 
 var $ = require('jquery');
 require('bootstrap');
-
+import * as _ from 'underscore';
 
 @Component({
     selector: 'customers',

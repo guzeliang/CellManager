@@ -2,10 +2,11 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router }   from '@angular/router';
-var md5 = require('blueimp-md5');
 
 import {LoginService} from './login.service';
+import md5 = require('blueimp-md5');
 
+// declare var md5:any;
 
 @Component({
     selector: 'account',

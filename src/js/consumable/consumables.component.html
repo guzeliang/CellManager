@@ -87,6 +87,7 @@
                         <td class="col-xs-3">{{consumable.type}}</td>
                         <td class="col-xs-3">
                             <a class="gap" href="javascript:void(0)" (click)="remove(consumable, $event)" id="{{consumable.id}}">删除</a>
+                            <a class="gap" href="javascript:void(0)" (click)="qr(consumable, $event)">生成二维码</a>
                         </td>
                     </tr>
                 </tbody>

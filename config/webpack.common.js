@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 //当webpack加载到某个js模块里，出现了未定义且名称符合（字符串完全匹配）配置中key的变量时，会自动require配置中value所指定的js模块。
 var providePlugin = new webpack.ProvidePlugin({
@@ -16,6 +17,7 @@ module.exports = {
     entry: {
         'lodash': 'lodash',
         'ng2-pagination': 'ng2-pagination',
+        'qrcode-generator': 'qrcode-generator',
         polyfills: [
             'zone.js',
             'rxjs',
@@ -39,7 +41,7 @@ module.exports = {
             'jquery',
             'angular2-cookie',
             'blueimp-md5',
-            'ng2-file-upload',
+            'ng2-file-upload'
         ],
         app: './src/js/main.ts'
     },
@@ -92,6 +94,10 @@ module.exports = {
         new HtmlWebpackPlugin({
             favicon: 'src/favicon.ico',
             template: 'src/index.html'
-        })
+        }),
+        // new CopyWebpackPlugin([{
+        //     from: helpers.root('src', 'libs'),
+        //     to: helpers.root('public', 'libs')
+        // }]),
     ]
 };

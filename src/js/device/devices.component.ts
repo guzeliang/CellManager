@@ -8,6 +8,7 @@ import {DeviceService} from './device.service';
 
 var $ = require('jquery');
 require('bootstrap');
+import * as _ from 'underscore';
 
 
 @Component({
@@ -106,6 +107,7 @@ export class DevicesComponent implements OnInit {
     }
     
     ngOnInit(): void {
+        console.log(_);
         this.route.params.forEach( (param:Params) => {
             _.extend(this.params, param);
         });

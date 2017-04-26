@@ -9,6 +9,7 @@ import {AppxService} from './appx.service';
 
 var $ = require('jquery');
 require('bootstrap');
+import * as _ from 'underscore';
 
 
 @Component({
