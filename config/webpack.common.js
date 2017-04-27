@@ -42,14 +42,12 @@ module.exports = {
             'ng2-file-upload',
             'ng2-pagination'
         ],
-        app: './src/js/main.ts'
+        app: './src/main.browser.ts'
     },
-
     resolve: {
         extensions: ['', '.js', '.ts'],
         alias: {}
     },
-
     module: {
         loaders: [{
                 test: /\.ts$/,
@@ -93,10 +91,6 @@ module.exports = {
         new HtmlWebpackPlugin({
             favicon: 'src/favicon.ico',
             template: 'src/index.html'
-        }),
-        // new CopyWebpackPlugin([{
-        //     from: helpers.root('src', 'libs'),
-        //     to: helpers.root('public', 'libs')
-        // }]),
+        })
     ]
 };
