@@ -5,4 +5,5 @@ export class Consumable {
     type:string;
     status:string;
     createdAt:string;
+    times:number;
 }

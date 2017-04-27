@@ -65,14 +65,18 @@
             <table class="table table-striped" style="table-layout:fixed;word-wrap:break-word;" id="tblUses">
                 <thead class="thead-color">
                     <tr>
+
+                        <th class="col-xs-2" style="cursor:pointer">
+                            名称
+                        </th>
                         <th class="col-xs-3" style="cursor:pointer">
-                            编号
+                            编码
                         </th>
                         <th class="col-xs-3" style="cursor:pointer">
                             描述
                         </th>
-                        <th class="col-xs-3" style="cursor:pointer">
-                            名称
+                        <th class="col-xs-1" style="cursor:pointer">
+                            使用次数
                         </th>
                         <th class="col-xs-3">操作</th>
                     </tr>
@@ -82,9 +86,10 @@
                                                       itemsPerPage: pageSize,
                                                       currentPage: pageIndex,
                                                       totalItems: recordCount }">
+                        <td class="col-xs-2">{{consumable.type}}</td>
                         <td class="col-xs-3">{{consumable.serialNumber}}</td>
                         <td class="col-xs-3">{{consumable.description}}</td>
-                        <td class="col-xs-3">{{consumable.type}}</td>
+                        <td class="col-xs-1">{{consumable.times}}</td>
                         <td class="col-xs-3">
                             <a class="gap" href="javascript:void(0)" (click)="remove(consumable, $event)" id="{{consumable.id}}">删除</a>
                             <a class="gap" href="javascript:void(0)" (click)="qr(consumable, $event)">生成二维码</a>
