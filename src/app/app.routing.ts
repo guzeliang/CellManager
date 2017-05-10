@@ -6,9 +6,13 @@ import { AuthGuard } from './common/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/devices', pathMatch: 'full' },
-  { path: 'devices', loadChildren: './device/device.module#DeviceModule', canActivate:[AuthGuard]},
-  { path: 'customers', loadChildren: './customer/customer.module#CustomerModule' , canActivate:[AuthGuard] },
-  { path: 'consumables', loadChildren: './consumable/consumable.module#ConsumableModule', canActivate:[AuthGuard] },
+  { path: 'devices', loadChildren: './device/device.module#DeviceModule', canActivate: [AuthGuard]},
+  { path: 'customers',
+    loadChildren: './customer/customer.module#CustomerModule',
+    canActivate: [ AuthGuard ] },
+  { path: 'consumables',
+    loadChildren: './consumable/consumable.module#ConsumableModule',
+    canActivate: [ AuthGuard ] },
   { path: 'login', loadChildren: './login/login.module#LoginModule' },
   { path: 'appx', loadChildren: './appx/appx.module#AppxModule' },
 ];

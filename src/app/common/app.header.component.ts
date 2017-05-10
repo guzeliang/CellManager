@@ -1,32 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, AfterContentChecked } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
-import {CookieService} from 'angular2-cookie/core';
-import {Router }   from '@angular/router';
+import { CookieService } from 'angular2-cookie/core';
+import { Router }   from '@angular/router';
 
-var $ = require('jquery');
+import * as $ from 'jquery';
 
 @Component({
   selector: 'header',
-  providers:[],
   template: `
-    <div class="navbar navbar-inverse navbar-fixed-top" id="topNav" role="navigation" style="z-index: 4;">
+    <div class="navbar navbar-inverse navbar-fixed-top"  style="z-index: 4;">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand"  routerLink="/devices" style="margin-top:-4px;"><i class="glyphicon glyphicon-home"></i> 管理平台</a>
+                <a class="navbar-brand"  routerLink="/devices" style="margin-top:-4px;">
+                <i class="glyphicon glyphicon-home"></i> 管理平台</a>
             </div>
             <div class="navbar-collapse">
                <ul class='nav navbar-nav'>
                    <li>
-                        <a routerLink="/devices" (click)='addClassx($event)' routerLinkActive="active">设备</a>
+                        <a routerLink="/devices" (click)='addClassx($event)' 
+                        routerLinkActive="active">设备</a>
                    </li>
                    <li>
-                        <a routerLink="/customers" (click)='addClassx($event)'  routerLinkActive="active">客户</a>
+                        <a routerLink="/customers" (click)='addClassx($event)'  
+                        routerLinkActive="active">客户</a>
                    </li>
                    <li>
-                        <a routerLink="/consumables" (click)='addClassx($event)'  routerLinkActive="active">耗材</a>
+                        <a routerLink="/consumables" (click)='addClassx($event)'  
+                        routerLinkActive="active">耗材</a>
                    </li>
                    <li>
-                        <a routerLink="/appx" (click)='addClassx($event)'  routerLinkActive="active">客户端升级</a>
+                        <a routerLink="/appx" (click)='addClassx($event)'  
+                        routerLinkActive="active">客户端升级</a>
                    </li>
                </ul>
                 <ul class="nav navbar-nav navbar-right" *ngIf='name'>
@@ -43,29 +47,28 @@ var $ = require('jquery');
     </div>
  `
 })
-export class HeaderComponent {
-    private name:string;
-    addClassx(evt:any) {
-        //处理鼠标移走后 选中样式就消失的bug
+export class HeaderComponent implements OnInit, AfterContentChecked {
+    public name: string;
+    constructor( private http: Http, private _service: CookieService, private router: Router) {
+    }
+
+    public addClassx(evt: any) {
+        // 处理鼠标移走后 选中样式就消失的bug
         $(evt.target).blur();
     }
-    
-    constructor( private http:Http, private _service:CookieService,private router: Router) {
-    }
-    logout() {
-        this.http.get('/api/logout').toPromise().then(res => {
+    public logout() {
+        this.http.get('/api/logout').toPromise().then((res) => {
             this.router.navigate(['/login']);
-        }).catch(err => {
-
+        }).catch((err) => {
+            console.log(err.message);
         });
     }
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         this.name = this._service.get('name');
     }
-    
-    ngAfterContentChecked():void {
-        console.log('header content checked')
+    public ngAfterContentChecked(): void {
+        console.log('header content checked');
         this.name = this._service.get('name');
     }
 }

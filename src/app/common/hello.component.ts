@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
-import { Headers, Http, Response,RequestOptions } from '@angular/http';
+import { Component, OnInit } from '@angular/core';
+import { Headers, Http, Response, RequestOptions } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
-
 
 @Component({
   selector: 'hello',
@@ -11,17 +10,18 @@ import 'rxjs/add/operator/toPromise';
    <h1>hello world, {{title}}</h1>
  `
 })
-export class HelloComponent {
-  title = 'Tour of Heroes';
-  isshow=true;
+export class HelloComponent implements OnInit {
+  public title = 'Tour of Heroes';
+  public isshow = true;
 
-  constructor( private http:Http) {
+  constructor( private http: Http) {
   }
 
-  ngOnInit(): void {
-     this.http.get('/foo').subscribe((res :Response) => {
-        this.title = res.json().data
-     }, (err:any) => {
-     });
+  public ngOnInit(): void {
+     this.http.get('/foo').subscribe((res: Response) => {
+        this.title = res.json().data;
+     }, (err) => {
+        console.log(err.message);
+    });
   }
 }

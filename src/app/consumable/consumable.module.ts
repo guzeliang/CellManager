@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
-import { CommonModule} from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 import { ConsumableRoutingModule } from './consumable.routing';
-import {Ng2PaginationModule} from 'ng2-pagination/dist/ng2-pagination'
+import { Ng2PaginationModule } from 'ng2-pagination/dist/ng2-pagination';
 
 import { ConsumablesComponent } from './consumables.component';
-import {ConsumableService} from './consumable.service'
+import { ConsumableService } from './consumable.service';
 
 @NgModule({
     imports: [
@@ -17,7 +17,7 @@ import {ConsumableService} from './consumable.service'
     ],
     exports: [],
     declarations: [
-        ConsumablesComponent, 
+        ConsumablesComponent
         ],
     providers: [ConsumableService],
 })

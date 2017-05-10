@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
-import { CommonModule} from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 import { CustomerRoutingModule } from './customer.routing';
-import {Ng2PaginationModule} from 'ng2-pagination/dist/ng2-pagination'
+import { Ng2PaginationModule } from 'ng2-pagination/dist/ng2-pagination';
 
 import { CustomersComponent } from './customers.component';
-import {CustomerService} from './customer.service';
+import { CustomerService } from './customer.service';
 
 @NgModule({
     imports: [
@@ -17,7 +17,7 @@ import {CustomerService} from './customer.service';
     ],
     exports: [],
     declarations: [
-        CustomersComponent, 
+        CustomersComponent
         ],
     providers: [CustomerService],
 })

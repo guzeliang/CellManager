@@ -1,7 +1,7 @@
 export class Member {
-    id:number;
-    lisence:string;
-    name:string;
-    description:string;
-    contact:string;
+    public id: number;
+    public lisence: string;
+    public name: string;
+    public description: string;
+    public contact: string;
 }

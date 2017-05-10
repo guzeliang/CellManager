@@ -3,14 +3,14 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app.routing'; 
+import { AppRoutingModule } from './app.routing';
 import { AuthGuard } from './common/auth.guard';
-import {CookieService} from 'angular2-cookie/core';
+import { CookieService } from 'angular2-cookie/core';
 
 import { NotFoundComponent } from './common/notfound.component';
 
-import {HeaderComponent} from './common/app.header.component';
-import {FooterComponent} from './common/app.footer.component';
+import { HeaderComponent } from './common/app.header.component';
+import { FooterComponent } from './common/app.footer.component';
 
 @NgModule({
   imports: [
@@ -20,7 +20,7 @@ import {FooterComponent} from './common/app.footer.component';
     AppRoutingModule,
   ],
   declarations: [
-    AppComponent, 
+    AppComponent,
     HeaderComponent,
     FooterComponent,
     NotFoundComponent,

@@ -3,122 +3,117 @@ import { Headers, Http, Response } from '@angular/http';
 import { ActivatedRoute, Params }   from '@angular/router';
 import { NgForm } from '@angular/forms';
 
-import {Device} from './device';
-import {DeviceService} from './device.service';
+import { Device } from './device';
+import { DeviceService } from './device.service';
 
-var $ = require('jquery');
-require('bootstrap');
 import * as _ from 'underscore';
-
+import * as $ from 'jquery';
+import * as bs from 'bootstrap';
 
 @Component({
     selector: 'devices',
     templateUrl: './devices.component.html'
 })
 export class DevicesComponent implements OnInit {
-    params:any = {};
+    public params: any = {};
     public devices: Device[];
-    public recordCount:number;
-    public pageSize:number = 10;
-    public pageIndex:number = 1;
-    public searchWord:string="";
+    public recordCount: number;
+    public pageSize: number = 10;
+    public pageIndex: number = 1;
+    public searchWord: string = '';
 
-    public SelectedDevice:Device = new Device;
+    public SelectedDevice: Device = new Device();
 
-    constructor( private http:Http, private service:DeviceService,private route: ActivatedRoute) {
+    constructor(private http: Http,
+                private service: DeviceService,
+                private route: ActivatedRoute) {
     }
-    
-    search() {
-        this.pageIndex=1;
-        var opt = {pagesize:this.pageSize, pageindex:this.pageIndex, keyword:this.searchWord};
+    public search() {
+        this.pageIndex = 1;
+        let opt = {pagesize: this.pageSize, pageindex: this.pageIndex, keyword: this.searchWord};
         _.extend(opt, this.params);
         this.service.page(opt)
-            .then( res => {
+            .then( (res) => {
                     this.devices = res.json().result as Device[];
                     this.recordCount = res.json().total;
-            }).catch(err => console.log(err.message || err))
+            }).catch((err) => console.log(err.message || err));
     }
-    
-    remove(device:Device, evt:any) {
-        if(!confirm('确定要删除吗')) return;
-        this.service.delete(device.id).then(res => {
-            var ret = res.json();
-            if(ret.code === 'success') {
+    public remove(device: Device, evt: any) {
+        if (!confirm('确定要删除吗')) {
+            return;
+        }
+
+        this.service.delete(device.id).then((res) => {
+            let ret = res.json();
+            if (ret.code === 'success') {
                 this.devices = _.reject(this.devices, (each) => {
                     return each.id === device.id;
-                })
+                });
             } else {
-              this.popBy(evt.target, ret.message,'');  
+              this.popBy(evt.target, ret.message, '');
             }
-            
-        }).catch(err => {
-            console.log(err.message || err)
-            this.popBy('#btnCreate', err.message,'');
-        })
+        }).catch((err) => {
+            console.log(err.message || err);
+            this.popBy('#btnCreate', err.message, '');
+        });
     }
 
-    popBy(obj:string, message:string, direct:string) {
+    public popBy(obj: string, message: string, direct: string) {
         $(obj).popover('destroy');
         $(obj).popover({
-            placement: direct ||'bottom',
+            placement: direct || 'bottom',
             trigger: 'manual',
             content: message,
             container: 'body'
         });
-    
         clearTimeout($(obj).data('timeout1986'));
         $(obj).popover('show');
-        var timeout = setTimeout(function () { $(obj).popover('hide'); }, 3000);
-        $(obj).data('timeout1986',timeout);
+        let timeout = setTimeout( () => { $(obj).popover('hide'); }, 3000);
+        $(obj).data('timeout1986', timeout);
     }
-    
-    
-    openDialog() {
-        this.SelectedDevice = new Device;
+
+    public openDialog() {
+        this.SelectedDevice = new Device();
         $('#modalCreate').modal('show');
     }
-    create(form:NgForm, btn:any) {
-        if(form.invalid) {
+    public create(form: NgForm, btn: any) {
+        if (form.invalid) {
             return false;
         }
-        var _this = this;
-        this.service.create(this.SelectedDevice).then(res => {
-            var ret = res.json();
-            if(ret.code==='success') {
+        let _this = this;
+        this.service.create(this.SelectedDevice).then((res) => {
+            let ret = res.json();
+            if (ret.code === 'success') {
                 _this.pageChange(1);
-                //_this.devices.unshift(ret.result as Device);
                 btn.click();
             } else {
-                _this.popBy('#btnCreate', ret.message,'');
+                _this.popBy('#btnCreate', ret.message, '');
             }
-        }).catch(err=> {
-            _this.popBy('#btnCreate', err.message,'');
+        }).catch((err) => {
+            _this.popBy('#btnCreate', err.message, '');
         });
     }
-    
-    pageChange(pageIndex:number) {
+    public pageChange(pageIndex: number) {
         this.pageIndex = pageIndex;
-        this.service.page({pagesize:this.pageSize, pageindex:pageIndex, keyword:this.searchWord})
-            .then( res => {
+        this.service.page({pagesize: this.pageSize, pageindex: pageIndex, keyword: this.searchWord})
+            .then( (res) => {
                 this.devices = res.json().result as Device[];
                 this.recordCount = res.json().total;
             })
-            .catch(err => console.log(err.message || err))
+            .catch((err) => console.log(err.message || err));
     }
-    
-    ngOnInit(): void {
+    public ngOnInit(): void {
         console.log(_);
-        this.route.params.forEach( (param:Params) => {
+        this.route.params.forEach( (param: Params) => {
             _.extend(this.params, param);
         });
-        
-        var opt = {pagesize:this.pageSize, pageindex:this.pageIndex};
+        let opt = {pagesize: this.pageSize, pageindex: this.pageIndex};
         _.extend(opt, this.params);
         this.service.page(opt)
-            .then( res => {
+            .then( (res) => {
                 this.devices = res.json().result as  Device[];
                 this.recordCount = res.json().total;
             })
-            .catch(err => console.log(err.message || err))
+            .catch((err) => console.log(err.message || err));
         }
 }

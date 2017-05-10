@@ -1,7 +1,7 @@
 export class Device {
-    id:number;
-    clientId:string;
-    address:string;
-    description:string;
-    createdAt:string;
+   public id: number;
+   public clientId: string;
+   public address: string;
+   public description: string;
+   public createdAt: string;
 }

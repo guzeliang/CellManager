@@ -1,4 +1,4 @@
 export class Appx {
-    name:string;
-    createTime:string;
+    public name: string;
+    public createTime: string;
 }
