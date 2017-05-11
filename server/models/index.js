@@ -6,12 +6,17 @@ var Member = require('./member');
 var DeviceUnionConsumable = require('./deviceUnionConsumable');
 
 var db = require('./db');
+var rootdb = require('./rootdb');
 
-db.sync().then(function() {
-    console.log('数据库同步成功')
-}).catch(function(err) {
-    console.log(err, '数据库同步失败')
-})
+rootdb.query(`CREATE DATABASE IF NOT EXISTS ${config.DB.database} CHARSET utf8`, { raw: true })
+    .then(() => {
+        return db.sync();
+    })
+    .then(function() {
+        console.log('数据库同步成功')
+    }).catch(function(err) {
+        console.log(err, '数据库同步失败')
+    })
 
 exports.RemoteDevice = RemoteDevice;
 exports.Consumable = Consumable;
