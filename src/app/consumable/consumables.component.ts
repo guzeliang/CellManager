@@ -8,7 +8,7 @@ import { ConsumableService } from './consumable.service';
 import * as QRCode from 'qrcode';
 import * as _ from 'underscore';
 import * as $ from 'jquery';
-import * as bs from 'bootstrap';
+import 'bootstrap';
 
 @Component({
     selector: 'consumables',

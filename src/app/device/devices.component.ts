@@ -8,7 +8,7 @@ import { DeviceService } from './device.service';
 
 import * as _ from 'underscore';
 import * as $ from 'jquery';
-import * as bs from 'bootstrap';
+import 'bootstrap';
 
 @Component({
     selector: 'devices',

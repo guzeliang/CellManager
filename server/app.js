@@ -45,6 +45,7 @@ app.use(function(req, res, next) {
 });
 
 require("./routers/")(app);
+require("./task");
 
 app.use(function(req, res, next) {
     var err = new Error('Not Found' + req.originalUrl);

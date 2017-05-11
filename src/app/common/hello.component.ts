@@ -5,7 +5,7 @@ import 'rxjs/add/operator/toPromise';
 
 @Component({
   selector: 'hello',
-  providers:[],
+  providers: [],
   template: `
    <h1>hello world, {{title}}</h1>
  `

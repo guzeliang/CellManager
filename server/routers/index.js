@@ -18,5 +18,6 @@ module.exports = function(app) {
     app.use(require('./customer'));
     app.use(require('./consumable'));
     app.use(require('./appx'));
+    app.use(require('./sim'));
 
 };
