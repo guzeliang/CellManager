@@ -2,6 +2,7 @@ var RemoteDevice = require('./remoteDevice');
 var Consumable = require('./consumable');
 var Customer = require('./customer');
 var Member = require('./member');
+var config = require('../config');
 
 var DeviceUnionConsumable = require('./deviceUnionConsumable');
 
