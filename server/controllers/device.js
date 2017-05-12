@@ -137,7 +137,7 @@ exports.qr = function(req, res) {
         }).then(() => { //判断该耗材使用次数是否大于5
             return models.DeviceUnionConsumable.sum('times', { where: { consumableId: consumable.id } })
         }).then((times) => {
-            usedTimes = times;
+            usedTimes = times || 0;
             if (times >= 50) {
                 return Promise.reject(new Error('耗材最多只能使用50次'));
             }

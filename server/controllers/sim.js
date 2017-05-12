@@ -27,7 +27,7 @@ exports.location = function(req, res) {
     var lac = req.query.lac;
     var ci = req.query.ci;
     var deviceid = req.query.deviceid;
-    var deviceType = req.query.deviceType || 1; //默认为反引器
+    var deviceType = req.query.devicetype || 1; //默认为反引器
 
     if (!deviceid) {
         return res.json(jsonHelper.getError('deviceid is empty'));
