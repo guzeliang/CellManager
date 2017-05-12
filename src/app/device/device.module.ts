@@ -6,6 +6,7 @@ import { DeviceRoutingModule } from './device.routing';
 import { Ng2PaginationModule } from 'ng2-pagination/dist/ng2-pagination';
 import { DevicesComponent } from './devices.component';
 import { DeviceService } from './device.service';
+import { MyDeviceType } from './pipe';
 
 @NgModule({
     imports: [
@@ -16,7 +17,8 @@ import { DeviceService } from './device.service';
     ],
     exports: [],
     declarations: [
-        DevicesComponent
+        DevicesComponent,
+        MyDeviceType
         ],
     providers: [DeviceService],
 })

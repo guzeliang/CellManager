@@ -60,10 +60,10 @@
                             编号
                         </th>
                         <th class="col-xs-3" style="cursor:pointer">
-                            描述
+                            地址
                         </th>
                         <th class="col-xs-3" style="cursor:pointer">
-                            地址
+                            类型
                         </th>
                         <th class="col-xs-3">操作</th>
                     </tr>
@@ -74,8 +74,8 @@
                                                       currentPage: pageIndex,
                                                       totalItems: recordCount }">
                         <td class="col-xs-3">{{device.clientId}}</td>
-                        <td class="col-xs-3">{{device.description}}</td>
                         <td class="col-xs-3">{{device.address}}</td>
+                        <td class="col-xs-3">{{device.type | myDeviceType}}</td>
                         <td class="col-xs-3">
                             <a class="gap" href="javascript:void(0)" (click)="remove(device, $event)" id="{{device.id}}">删除</a>
                             <a class="gap" [routerLink]="['/consumables', {deviceid: device.id}]">耗材</a>
