@@ -73,7 +73,7 @@ exports.remove = function(req, res) {
 exports.qr = function(req, res) {
     var id = req.query.id;
     var deviceId = req.query.deviceid;
-    var deviceType = req.quey.devicetype;
+    var deviceType = req.query.devicetype || 1;
 
     //如果耗材和设备没有同时传入 则需要如下判断
     //如果扫描的是耗材，先判断是否已经扫描了设备 若扫描了 就走正常流程 否则写入cookie

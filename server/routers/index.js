@@ -10,7 +10,7 @@ module.exports = function(app) {
     ];
 
     app.get(routers, function(req, res) {
-        res.sendFile(path.join(__dirname, '../../public', 'index.html'));
+        res.sendFile(path.join(__dirname, '../../dist', 'index.html'));
     })
 
     app.use(require('./account'));
