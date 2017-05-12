@@ -7,6 +7,7 @@ import { Ng2PaginationModule } from 'ng2-pagination/dist/ng2-pagination';
 
 import { ConsumablesComponent } from './consumables.component';
 import { ConsumableService } from './consumable.service';
+import { MyConsumableType } from './pipe';
 
 @NgModule({
     imports: [
@@ -17,7 +18,8 @@ import { ConsumableService } from './consumable.service';
     ],
     exports: [],
     declarations: [
-        ConsumablesComponent
+        ConsumablesComponent,
+        MyConsumableType
         ],
     providers: [ConsumableService],
 })

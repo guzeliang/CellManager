@@ -190,6 +190,10 @@ module.exports = function(options) {
                 {
                     test: /\.(eot|woff2?|svg|ttf)([\?]?.*)$/,
                     use: 'file-loader'
+                },
+                {
+                    test: require.resolve('jquery'), // 此loader配置项的目标是NPM中的jquery
+                    loader: 'expose-loader?jQuery!expose-loader?$', // 先把jQuery对象声明成为全局变量`jQuery`，再通过管道进一步又声明成为全局变量`$`
                 }
 
             ],

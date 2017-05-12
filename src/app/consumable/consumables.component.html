@@ -18,11 +18,20 @@
                             <p *ngIf="xform.controls.serialNumber?.errors?.minlength">* 长度必须大于10个字符</p>
                         </div>
                         <div class="input-group col-xs-12 bottom-gap">
-                            <span class="input-group-addon addon-width-4 " style="width:95px; text-align:right;">名称：</span>
-                            <input class="form-control" id="txtName" name='type' type="text" required maxlength="50" [(ngModel)]="SelectedModel.type" />
+                            <span class="input-group-addon addon-width-4 " style="width:95px; text-align:right;">类型：</span>
+                            <select class="form-control" name='type' [(ngModel)]="SelectedModel.type">
+                                <option value="1">反应器</option>
+                                <option value="2">清洗机</option>
+                                <option value="3">灌流反应器</option>
+                                <option value="9">通用</option>
+                            </select>
                         </div>
-                        <div [hidden]="xform.controls.type?.valid" class="alert alert-danger">
-                            <p *ngIf="xform.controls.type?.errors?.required">* 必填项</p>
+                        <div class="input-group col-xs-12 bottom-gap">
+                            <span class="input-group-addon addon-width-4 " style="width:95px; text-align:right;">名称：</span>
+                            <input class="form-control" id="txtName" name='name' type="text" required maxlength="50" [(ngModel)]="SelectedModel.name" />
+                        </div>
+                        <div [hidden]="xform.controls.name?.valid" class="alert alert-danger">
+                            <p *ngIf="xform.controls.name?.errors?.required">* 必填项</p>
                         </div>
                         <div class="input-group col-xs-12 bottom-gap">
                             <span class="input-group-addon addon-width-4 " style="width:95px; text-align:right;">描述：</span>
@@ -69,8 +78,11 @@
                         <th class="col-xs-2" style="cursor:pointer">
                             名称
                         </th>
-                        <th class="col-xs-3" style="cursor:pointer">
+                        <th class="col-xs-2" style="cursor:pointer">
                             编码
+                        </th>
+                        <th class="col-xs-2" style="cursor:pointer">
+                            类型
                         </th>
                         <th class="col-xs-3" style="cursor:pointer">
                             描述
@@ -86,10 +98,11 @@
                                                       itemsPerPage: pageSize,
                                                       currentPage: pageIndex,
                                                       totalItems: recordCount }">
-                        <td class="col-xs-2">{{consumable.type}}</td>
-                        <td class="col-xs-3">{{consumable.serialNumber}}</td>
+                        <td class="col-xs-2">{{consumable.name}}</td>
+                        <td class="col-xs-2">{{consumable.serialNumber}}</td>
+                        <td class="col-xs-2">{{consumable.type | myConsumableType}}</td>
                         <td class="col-xs-3">{{consumable.description}}</td>
-                        <td class="col-xs-1">{{consumable.times}}</td>
+                        <td class="col-xs-1">{{consumable.times || 0}}</td>
                         <td class="col-xs-3">
                             <a class="gap" href="javascript:void(0)" (click)="remove(consumable, $event)" id="{{consumable.id}}">删除</a>
                             <a class="gap" href="javascript:void(0)" (click)="qr(consumable, $event)">生成二维码</a>

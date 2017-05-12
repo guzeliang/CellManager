@@ -9,6 +9,13 @@ var RemoteDevice = db.define('remoteDevice', {
         primaryKey: true,
         allowNull: false
     },
+    name: {
+        type: Sequelize.STRING(100),
+        defaultValue: ''
+    },
+    type: { //1:反应器,2:清洗机,3:灌流，
+        type: Sequelize.INTEGER,
+    },
     customerId: {
         type: Sequelize.INTEGER,
     },

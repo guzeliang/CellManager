@@ -73,6 +73,7 @@ exports.remove = function(req, res) {
 exports.qr = function(req, res) {
     var id = req.query.id;
     var deviceId = req.query.deviceid;
+    var deviceType = req.quey.devicetype;
 
     //如果耗材和设备没有同时传入 则需要如下判断
     //如果扫描的是耗材，先判断是否已经扫描了设备 若扫描了 就走正常流程 否则写入cookie
@@ -104,7 +105,7 @@ exports.qr = function(req, res) {
         }
     }
 
-    var remoteDevie;
+    var remoteDevice;
     var consumable;
     var usedTimes = 0;
 
@@ -112,11 +113,12 @@ exports.qr = function(req, res) {
         .then(doc => {
             if (!doc) return models.RemoteDevice.create({
                 clientId: deviceId,
+                type: deviceType
             }, { raw: true }).then(docx => {
-                remoteDevie = docx.dataValues;
+                remoteDevice = docx.dataValues;
                 return Promise.resolve(docx);
             });
-            remoteDevie = doc;
+            remoteDevice = doc;
             return Promise.resolve(doc);
         })
         .then(p => {
@@ -124,7 +126,13 @@ exports.qr = function(req, res) {
         })
         .then(docx => {
             if (!docx) return Promise.reject(new Error('对应的耗材不存在，请重新扫描耗材'));
+
             consumable = docx;
+
+            if (consumable.type !== remoteDevice.type && consumable.type != 9) {
+                return Promise.reject(new Error('耗材类型与设备类型不匹配'));
+            }
+
             return Promise.resolve(docx);
         }).then(() => { //判断该耗材使用次数是否大于5
             return models.DeviceUnionConsumable.sum('times', { where: { consumableId: consumable.id } })
@@ -133,11 +141,11 @@ exports.qr = function(req, res) {
             if (times >= 50) {
                 return Promise.reject(new Error('耗材最多只能使用50次'));
             }
-            return models.DeviceUnionConsumable.findOne({ where: { consumableId: consumable.id, deviceId: remoteDevie.id }, raw: true });
+            return models.DeviceUnionConsumable.findOne({ where: { consumableId: consumable.id, deviceId: remoteDevice.id }, raw: true });
         })
         .then((doc) => {
             if (!doc) {
-                return models.DeviceUnionConsumable.create({ consumableId: consumable.id, deviceId: remoteDevie.id })
+                return models.DeviceUnionConsumable.create({ consumableId: consumable.id, deviceId: remoteDevice.id })
             } else {
                 doc.times += 1;
                 return models.DeviceUnionConsumable.update(doc, { where: { id: doc.id }, fields: ['times'] });

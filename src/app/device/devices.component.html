@@ -36,7 +36,7 @@
 <div onselectstart="return false">
     <div class="well well-sm">
         <div class="container fixed-width">
-            <button type="button" class="btn btn-default gap" id="btnCreate" data-toggle="modal" (click)="openDialog()">
+            <button type="button" class="btn btn-default gap hidden" id="btnCreate" data-toggle="modal" (click)="openDialog()">
                 <span class="glyphicon glyphicon-plus"></span> 添加
             </button>
             <button type="button" class="btn btn-default gap" style="display: none" id="btnRemove" ng-click="removeBatch(this, $event.target)">

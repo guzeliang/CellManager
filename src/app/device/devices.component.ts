@@ -103,7 +103,6 @@ export class DevicesComponent implements OnInit {
             .catch((err) => console.log(err.message || err));
     }
     public ngOnInit(): void {
-        console.log(_);
         this.route.params.forEach( (param: Params) => {
             _.extend(this.params, param);
         });

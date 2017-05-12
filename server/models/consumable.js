@@ -19,7 +19,10 @@ var Consumable = db.define('consumable', {
     description: {
         type: Sequelize.STRING(100)
     },
-    type: {
+    type: { //1:反应器,2:清洗机,3:灌流，9:通用
+        type: Sequelize.INTEGER,
+    },
+    name: {
         type: Sequelize.STRING(100),
     },
     status: {
