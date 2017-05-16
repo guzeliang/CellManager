@@ -11,6 +11,7 @@ import { NotFoundComponent } from './common/notfound.component';
 
 import { HeaderComponent } from './common/app.header.component';
 import { FooterComponent } from './common/app.footer.component';
+import { HelloComponent } from './common/hello.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { FooterComponent } from './common/app.footer.component';
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    HelloComponent,
     NotFoundComponent,
   ],
   providers: [AuthGuard, CookieService],

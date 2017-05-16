@@ -10,7 +10,7 @@ exports.getPage = function(req, res, next) {
     var pageSize = +req.query.pagesize || 10;
     var pageIndex = +req.query.pageindex || 1;
     var firNum = (pageIndex - 1) * pageSize;
-    var keyword = req.query.keyword;
+    var keyword = req.query.keyword || '';
     var customerId = +req.query.customerid || -1;
 
     var query = {
@@ -19,9 +19,9 @@ exports.getPage = function(req, res, next) {
         raw: true
     };
 
-    if (keyword) {
+    if (keyword.trim()) {
         query.where = {
-            description: { like: '%' + keyword + '%' }
+            clientId: { like: '%' + keyword + '%' }
         }
     }
 

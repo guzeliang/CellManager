@@ -3,13 +3,13 @@
         <h1 id="profileCreate" class="em-low txt-c mbxxl h2" style="text-align:center;">创建账户 <em>or</em> <a class="btn btn-highlight-1" routerLink="/login">Log in</a> </h1>
         <div class="row">
             <div class="col-xs-6 col-xs-offset-3">
-                <form #xform="ngForm" (ngSubmit)="create(xform,close)" novalidate>
+                <form #xform="ngForm" (ngSubmit)="create()" novalidate>
                     <div class="form-group has-error">
                         <div class="input-wrapper">
                             <label for="email">名称：</label>
                             <input class="form-control" name='name' type="text" required maxlength="50" minlength="4" [(ngModel)]="name" />
-                            <span *ngIf="xform.controls.name?.errors?.required" class="help-block has-error">* 必填项</span>
-                            <span class="help-block has-error" *ngIf="xform.controls.name?.errors?.minlength">* 长度必须大于4个字符</span>
+                            <span *ngIf="xform.controls.name?.errors?.required" class="help-block has-error name-required-err">* 必填项</span>
+                            <span class="help-block has-error name-length-err" *ngIf="xform.controls.name?.errors?.minlength">* 长度必须大于4个字符</span>
                         </div>
                     </div>
 
@@ -17,8 +17,8 @@
                         <div class="input-wrapper">
                             <label for="email">密码：</label>
                             <input class="form-control" name='password' type="password" required maxlength="50" minlength="4" [(ngModel)]="password" />
-                            <span *ngIf="xform.controls.password?.errors?.required" class="help-block has-error">* 必填项</span>
-                            <span class="help-block has-error" *ngIf="xform.controls.password?.errors?.minlength">* 长度必须大于4个字符</span>
+                            <span *ngIf="xform.controls.password?.errors?.required" class="help-block has-error  password-required-err">* 必填项</span>
+                            <span class="help-block has-error password-length-err" *ngIf="xform.controls.password?.errors?.minlength">* 长度必须大于4个字符</span>
                         </div>
                     </div>
 
@@ -26,8 +26,8 @@
                         <div class="input-wrapper">
                             <label for="email">联系方式：</label>
                             <input class="form-control" name='contact' type="text" required maxlength="50" minlength="5" [(ngModel)]="contact" />
-                            <span *ngIf="xform.controls.contact?.errors?.required" class="help-block has-error">* 必填项</span>
-                            <span class="help-block has-error" *ngIf="xform.controls.contact?.errors?.minlength">* 长度必须大于5个字符</span>
+                            <span *ngIf="xform.controls.contact?.errors?.required" class="help-block has-error  contact-required-err">* 必填项</span>
+                            <span class="help-block has-error contact-length-err" *ngIf="xform.controls.contact?.errors?.minlength">* 长度必须大于5个字符</span>
                         </div>
                     </div>
 
@@ -35,8 +35,8 @@
                         <div class="input-wrapper">
                             <label for="email">地址：</label>
                             <input class="form-control" name='address' type="text" required maxlength="50" minlength="4" [(ngModel)]="address" />
-                            <span *ngIf="xform.controls.address?.errors?.required" class="help-block has-error">* 必填项</span>
-                            <span class="help-block has-error" *ngIf="xform.controls.address?.errors?.minlength">* 长度必须大于4个字符</span>
+                            <span *ngIf="xform.controls.address?.errors?.required" class="help-block has-error  address-required-err">* 必填项</span>
+                            <span class="help-block has-error address-length-err" *ngIf="xform.controls.address?.errors?.minlength">* 长度必须大于4个字符</span>
                         </div>
                     </div>
                     <div class="form-group has-error">
