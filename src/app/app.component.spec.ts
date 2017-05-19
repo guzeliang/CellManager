@@ -19,16 +19,17 @@ describe(`App`, () => {
       declarations: [ AppComponent ],
       schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents(); // compile template and css
+    .compileComponents()
+    .then( () => {
+       fixture = TestBed.createComponent(AppComponent);
+       comp    = fixture.componentInstance;
+       fixture.detectChanges(); // trigger initial data binding
+
+       return fixture.whenStable().then(() => {
+        fixture.detectChanges();
+      });
+    });
   }));
-
-  // synchronous beforeEach
-  beforeEach(() => {
-    fixture = TestBed.createComponent(AppComponent);
-    comp    = fixture.componentInstance;
-
-    fixture.detectChanges(); // trigger initial data binding
-  });
 
   it(`should be readly initialized`, () => {
     expect(fixture).toBeDefined();

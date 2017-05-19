@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
+import { Headers, Response } from '@angular/http';
 import { ActivatedRoute, Params }   from '@angular/router';
 import { NgForm } from '@angular/forms';
 
@@ -24,8 +24,7 @@ export class DevicesComponent implements OnInit {
 
     public SelectedDevice: Device = new Device();
 
-    constructor(private http: Http,
-                private service: DeviceService,
+    constructor(private service: DeviceService,
                 private route: ActivatedRoute) {
     }
     public search() {
@@ -34,8 +33,8 @@ export class DevicesComponent implements OnInit {
         _.extend(opt, this.params);
         this.service.page(opt)
             .then( (res) => {
-                    this.devices = res.json().result as Device[];
-                    this.recordCount = res.json().total;
+                    this.devices = res.result as Device[];
+                    this.recordCount = res.total;
             }).catch((err) => console.log(err.message || err));
     }
     public remove(device: Device, evt: any) {
@@ -43,8 +42,7 @@ export class DevicesComponent implements OnInit {
             return;
         }
 
-        this.service.delete(device.id).then((res) => {
-            let ret = res.json();
+        this.service.delete(device.id).then((ret) => {
             if (ret.code === 'success') {
                 this.devices = _.reject(this.devices, (each) => {
                     return each.id === device.id;
@@ -81,8 +79,7 @@ export class DevicesComponent implements OnInit {
             return false;
         }
         let _this = this;
-        this.service.create(this.SelectedDevice).then((res) => {
-            let ret = res.json();
+        this.service.create(this.SelectedDevice).then((ret) => {
             if (ret.code === 'success') {
                 _this.pageChange(1);
                 btn.click();
@@ -97,8 +94,8 @@ export class DevicesComponent implements OnInit {
         this.pageIndex = pageIndex;
         this.service.page({pagesize: this.pageSize, pageindex: pageIndex, keyword: this.searchWord})
             .then( (res) => {
-                this.devices = res.json().result as Device[];
-                this.recordCount = res.json().total;
+                this.devices = res.result as Device[];
+                this.recordCount = res.total;
             })
             .catch((err) => console.log(err.message || err));
     }
@@ -110,8 +107,8 @@ export class DevicesComponent implements OnInit {
         _.extend(opt, this.params);
         this.service.page(opt)
             .then( (res) => {
-                this.devices = res.json().result as  Device[];
-                this.recordCount = res.json().total;
+                this.devices = res.result as  Device[];
+                this.recordCount = res.total;
             })
             .catch((err) => console.log(err.message || err));
         }

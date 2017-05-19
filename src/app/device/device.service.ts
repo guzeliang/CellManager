@@ -10,27 +10,58 @@ export class DeviceService {
     private apiUrl: string = '/api/device';
     constructor(private http: Http) { }
 
-    public delete(id: number): Promise<Response> {
-        return this.http.delete(this.apiUrl + '/' + id).toPromise();
+    public delete(id: number): Promise<any> {
+        return this.http.delete(this.apiUrl + '/' + id).toPromise().then((res) => {
+            if (res.status === 200 || res.status === 304) {
+                return Promise.resolve(res.json());
+            }
+
+            return Promise.reject(new Error('request status :' + res.status));
+        });
     }
 
-    public update(model: any): Promise<Response> {
-        return this.http.put(this.apiUrl, model).toPromise();
+    public update(model: any): Promise<any> {
+        return this.http.put(this.apiUrl, model).toPromise().then((res) => {
+            if (res.status === 200 || res.status === 304) {
+                return Promise.resolve(res.json());
+            }
+
+            return Promise.reject(new Error('request status :' + res.status));
+        });
     }
 
-    public create(model: any): Promise<Response> {
-        return this.http.post(this.apiUrl, model).toPromise();
+    public create(model: any): Promise<any> {
+        return this.http.post(this.apiUrl, model).toPromise().then((res) => {
+            if (res.status === 200 || res.status === 304) {
+                return Promise.resolve(res.json());
+            }
+
+            return Promise.reject(new Error('request status :' + res.status));
+        });
     }
 
-    public get(condition: Object): Promise<Response> {
+    public get(condition: Object): Promise<any> {
         let opt = new RequestOptions({search: this.generateSearchParams(condition)});
-        return this.http.get(this.apiUrl + '/list', opt).toPromise();
+        return this.http.get(this.apiUrl + '/list', opt).toPromise().then((res) => {
+            if (res.status === 200 || res.status === 304) {
+                return Promise.resolve(res.json());
+            }
+
+            return Promise.reject(new Error('request status :' + res.status));
+        });
     }
 
-    public page(condition: any): Promise<Response> {
+    public page(condition: any): Promise<any> {
         let opt = new RequestOptions({search: this.generateSearchParams(condition)});
-        return this.http.get(this.apiUrl + '/page', opt).toPromise();
+        return this.http.get(this.apiUrl + '/page', opt).toPromise().then((res) => {
+            if (res.status === 200 || res.status === 304) {
+                return Promise.resolve(res.json());
+            }
+
+            return Promise.reject(new Error('request status :' + res.status));
+        });
     }
+
     private generateSearchParams(condition: Object): string {
         let ret: string[] = [];
         for (let each in condition) {

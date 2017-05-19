@@ -92,7 +92,7 @@ describe('App', () => {
             browser.sleep(1000);
             alertDialog.accept(); // alertDialog.dismiss();
             browser.sleep(1000);
-        })
+        });
     });
 
 });
