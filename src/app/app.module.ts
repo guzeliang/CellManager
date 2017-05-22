@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule  } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
 import { AuthGuard } from './common/auth.guard';
-import { CookieService } from 'angular2-cookie/core';
+import { CookieModule } from 'ngx-cookie';
 
 import { NotFoundComponent } from './common/notfound.component';
 
@@ -17,7 +16,7 @@ import { HelloComponent } from './common/hello.component';
   imports: [
     BrowserModule,
     HttpModule,
-
+     CookieModule.forRoot(),
     AppRoutingModule,
   ],
   declarations: [
@@ -27,7 +26,7 @@ import { HelloComponent } from './common/hello.component';
     HelloComponent,
     NotFoundComponent,
   ],
-  providers: [AuthGuard, CookieService],
+  providers: [AuthGuard],
   bootstrap: [AppComponent, HeaderComponent],
 })
 export class AppModule { }

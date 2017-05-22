@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { RouterStub }   from '../testing/router-stub';
 import {  RouterLinkStubDirective } from '../testing/router.link.stub.directive';
 import {  RouterOutletStubComponent } from '../testing/router.outlet.stub.component';
-import {  CookieService } from 'angular2-cookie/core';
+import {  CookieService } from 'ngx-cookie';
 
 import { HeaderComponent } from './app.header.component';
 

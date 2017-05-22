@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterContentChecked } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
-import { CookieService } from 'angular2-cookie/core';
+import { CookieService } from 'ngx-cookie';
 import { Router }   from '@angular/router';
 
 import * as $ from 'jquery';
