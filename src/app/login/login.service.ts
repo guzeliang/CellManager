@@ -9,16 +9,28 @@ export class LoginService {
     public apiUrl: string = '/api/customer';
     constructor(private http: Http) { }
 
-    public singup(model: any): Promise<Response> {
-        return this.http.post('/api/singup', model).toPromise();
+    public singup(model: any): Promise<any> {
+        return this.http.post('/api/singup', model).toPromise().then((res) => {
+            if (res.status === 200 || res.status === 304) {
+                return Promise.resolve(res.json());
+            }
+
+            return Promise.reject(new Error('request status :' + res.status));
+        });
     }
 
-    public login(condition: Object): Promise<Response> {
+    public login(condition: Object): Promise<any> {
         let opt = new RequestOptions({search: this.generateSearchParams(condition)});
-        return this.http.get('/api/login', opt).toPromise();
+        return this.http.get('/api/login', opt).toPromise().then((res) => {
+            if (res.status === 200 || res.status === 304) {
+                return Promise.resolve(res.json());
+            }
+
+            return Promise.reject(new Error('request status :' + res.status));
+        });
     }
 
-     private generateSearchParams(condition: Object): string {
+    private generateSearchParams(condition: Object): string {
         let ret: string[] = [];
         for (let each in condition) {
             if (condition.hasOwnProperty(each)) {

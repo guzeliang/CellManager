@@ -41,8 +41,7 @@ export class AccountComponent {
             contact: this.contact,
         };
 
-        this.service.singup(model).then((res) => {
-            let ret = res.json();
+        this.service.singup(model).then((ret) => {
             if (ret.code === 'success') {
                 this.router.navigate(['/']);
             } else {

@@ -7,6 +7,9 @@ import * as $ from 'jquery';
 
 @Component({
   selector: 'header',
+  styles: [
+      '../../assets/css/bootstrap.css'
+  ],
   template: `
     <div class="navbar navbar-inverse navbar-fixed-top"  style="z-index: 4;">
         <div class="container">

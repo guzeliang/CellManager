@@ -24,8 +24,7 @@ export class LoginComponent {
                 private route: ActivatedRoute, private router: Router) {
     }
     public login() {
-        this.service.login({name: this.name, password: md5(this.password)}).then((res) => {
-            let ret = res.json();
+        this.service.login({name: this.name, password: md5(this.password)}).then((ret) => {
             if (ret.code === 'success') {
                 this.router.navigate(['/']);
             } else {
