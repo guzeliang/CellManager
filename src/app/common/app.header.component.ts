@@ -68,10 +68,12 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
     }
 
     public ngOnInit(): void {
-        this.name = this._service.get('name');
+        if (this._service.get('name')) {
+            this.name = this._service.get('name');
+        }
     }
+
     public ngAfterContentChecked(): void {
-        console.log('header content checked');
         this.name = this._service.get('name');
     }
 }

@@ -14,7 +14,7 @@ const routes: Routes = [
     loadChildren: './consumable/consumable.module#ConsumableModule',
     canActivate: [ AuthGuard ] },
   { path: 'login', loadChildren: './login/login.module#LoginModule' },
-  { path: 'appx', loadChildren: './appx/appx.module#AppxModule' },
+  { path: 'appx', loadChildren: './appx/appx.module#AppxModule', canActivate: [AuthGuard]},
 ];
 
 @NgModule({
