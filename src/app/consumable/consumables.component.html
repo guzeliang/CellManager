@@ -14,8 +14,8 @@
                             <input class="form-control" id="txtId" name='serialNumber' required maxlength="50" minlength="10" type="text" [(ngModel)]="SelectedModel.serialNumber" />
                         </div>
                         <div [hidden]="xform.controls.serialNumber?.valid" class="alert alert-danger">
-                            <p *ngIf="xform.controls.serialNumber?.errors?.required">* 必填项</p>
-                            <p *ngIf="xform.controls.serialNumber?.errors?.minlength">* 长度必须大于10个字符</p>
+                            <p *ngIf="xform.controls.serialNumber?.errors?.required" class='id-required-err'>* 必填项</p>
+                            <p *ngIf="xform.controls.serialNumber?.errors?.minlength" class='id-length-err'>* 长度必须大于10个字符</p>
                         </div>
                         <div class="input-group col-xs-12 bottom-gap">
                             <span class="input-group-addon addon-width-4 " style="width:95px; text-align:right;">类型：</span>
@@ -31,14 +31,14 @@
                             <input class="form-control" id="txtName" name='name' type="text" required maxlength="50" [(ngModel)]="SelectedModel.name" />
                         </div>
                         <div [hidden]="xform.controls.name?.valid" class="alert alert-danger">
-                            <p *ngIf="xform.controls.name?.errors?.required">* 必填项</p>
+                            <p *ngIf="xform.controls.name?.errors?.required"  class='name-required-err'>* 必填项</p>
                         </div>
                         <div class="input-group col-xs-12 bottom-gap">
                             <span class="input-group-addon addon-width-4 " style="width:95px; text-align:right;">描述：</span>
                             <input class="form-control" id="txtDesc" name='description' type="text" maxlength="50" minlength="5" [(ngModel)]="SelectedModel.description" />
                         </div>
                         <div [hidden]="xform.controls.description?.valid" class="alert alert-danger">
-                            <p *ngIf="xform.controls.description?.errors?.minlength">* 长度必须大于5个字符</p>
+                            <p *ngIf="xform.controls.description?.errors?.minlength" class='description-length-err'>* 长度必须大于5个字符</p>
                         </div>
 
                     </div>
@@ -61,9 +61,9 @@
                 <span class="glyphicon glyphicon-trash"></span> 删除
             </button>
             <div class="col-xs-6 col-md-3 input-group pull-right searchPanel">
-                <input type="text" class="form-control" id="searchInput" placeholder="请输入关键词" [(ngModel)]='searchWord' />
+                <input type="text" class="form-control" id="txtSearch" placeholder="请输入关键词" [(ngModel)]='searchWord' />
                 <span class="input-group-btn">
-                    <button type="submit" class="btn btn-default" id="searchBtn" (click)="search()">搜索</button>
+                    <button type="submit" class="btn btn-default" id="btnSearch" (click)="search()">搜索</button>
                 </span>
             </div>
         </div>
@@ -94,7 +94,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let consumable of consumables  | paginate: {
+                    <tr class='device-item' *ngFor="let consumable of consumables  | paginate: {
                                                       itemsPerPage: pageSize,
                                                       currentPage: pageIndex,
                                                       totalItems: recordCount }">
@@ -104,7 +104,7 @@
                         <td class="col-xs-3">{{consumable.description}}</td>
                         <td class="col-xs-1">{{consumable.times || 0}}</td>
                         <td class="col-xs-3">
-                            <a class="gap" href="javascript:void(0)" (click)="remove(consumable, $event)" id="{{consumable.id}}">删除</a>
+                            <a class="gap a-remove" href="javascript:void(0)" (click)="remove(consumable, $event)" id="{{consumable.id}}">删除</a>
                             <a class="gap" href="javascript:void(0)" (click)="qr(consumable, $event)">生成二维码</a>
                         </td>
                     </tr>
