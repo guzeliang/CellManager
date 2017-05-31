@@ -7,28 +7,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-// // tslint:disable-next-line:max-classes-per-file
-// @Directive({
-//   selector: '[routerLink]',
-// })
-// export class RouterLinkStubDirective {
-//   // tslint:disable-next-line:no-input-rename
-//   @Input('routerLink') public linkParams: string;
-//   public navigatedTo: any = null;
-
-//   @HostListener('click', ['$event.target'])
-//   public onClick() {
-//     this.navigatedTo = this.linkParams;
-//   }
-// }
-
-// tslint:disable-next-line:max-classes-per-file
-// @Component({
-//   selector: 'router-outlet',
-//   template: ''
-// })
-// export class RouterOutletStubComponent { }
-
 // tslint:disable-next-line:max-classes-per-file
 @Injectable()
 export class RouterStub {

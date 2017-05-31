@@ -86,7 +86,7 @@ let deviceServiceStub = {
     page : () => {
       return Promise.resolve(fakeRes);
     }
-  };
+};
 
 describe(`Devices`, () => {
     let comp: DevicesComponent;
@@ -100,33 +100,33 @@ describe(`Devices`, () => {
         imports: [FormsModule, Ng2PaginationModule],
         declarations: [ DevicesComponent, MyDeviceType ],
         providers:    [
-        {provide: DeviceService, useValue: deviceServiceStub},
-        {provide: ActivatedRoute, useValue: activatedRoute}
+            {provide: DeviceService, useValue: deviceServiceStub},
+            {provide: ActivatedRoute, useValue: activatedRoute}
         ],
         schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents()
     .then(() => {
-        fixture = TestBed.createComponent(DevicesComponent);
-        comp = fixture.componentInstance;
-        deviceService = fixture.debugElement.injector.get(DeviceService);
-    });
+            fixture = TestBed.createComponent(DevicesComponent);
+            comp = fixture.componentInstance;
+            deviceService = fixture.debugElement.injector.get(DeviceService);
+        });
     }));
     
     it(`should be readly initialized`, () => {
-    expect(fixture).toBeDefined();
-    expect(comp).toBeDefined();
+        expect(fixture).toBeDefined();
+        expect(comp).toBeDefined();
     });
     
     it(`should have 2 devices by async`, async(() => {
-    fixture.detectChanges();
-    
-    fixture.whenStable().then(() => {
         fixture.detectChanges();
-    
-        let x = fixture.debugElement.queryAll(By.css('.modelitems'));
-        expect(x.length).toEqual(2);
-    });
+        
+        fixture.whenStable().then(() => {
+            fixture.detectChanges();
+        
+            let x = fixture.debugElement.queryAll(By.css('.modelitems'));
+            expect(x.length).toEqual(2);
+        });
     }));
     
     it(`should have 3 devices by fakeasync`, fakeAsync(() => {

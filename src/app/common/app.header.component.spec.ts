@@ -67,7 +67,7 @@ describe('App HeaderComponent', () => {
         expect(links[4].linkParams).toBe('/appx', '5st link should go to appx');
     });
     
-    it('can click Heroes link in template', () => {
+    it('can click nav link in template', () => {
         const heroesLinkDe = linkDes[2];
         const heroesLink = links[2];
         

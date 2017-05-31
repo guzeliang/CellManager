@@ -65,10 +65,9 @@ describe('DeviceService (mockBackend)', () => {
             expect(backend).not.toBeNull('backend should be provided');
     }));
     
-    describe('when getHeroes', () => {
+    describe('when get devices', () => {
         let backend: MockBackend;
         let service: DeviceService;
-        let fakeHeroes: any;
         let response: Response;
     
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
