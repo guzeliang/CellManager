@@ -160,11 +160,11 @@ module.exports = function(options) {
                  * Returns compiled css content as string
                  *
                  */
-                {
-                    test: /\.scss$/,
-                    use: ['to-string-loader', 'css-loader', 'sass-loader'],
-                    exclude: [helpers.root('src', 'styles')]
-                },
+                // {
+                //     test: /\.scss$/,
+                //     use: ['to-string-loader', 'css-loader', 'sass-loader'],
+                //     exclude: [helpers.root('src', 'styles')]
+                // },
 
                 /* Raw loader support for *.html
                  * Returns file content as string
